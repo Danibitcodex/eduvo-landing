@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDUVO — Tu planeación de la semana, lista antes del lunes</title>
+<meta name="description" content="EDUVO entrega planeaciones didácticas completas, actividades, materiales y evaluaciones alineadas a la Nueva Escuela Mexicana. Hechas para tu grupo, listas para usar. Habla con nosotros por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Figtree:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   EDUVO — Sistema de diseño "Pizarrón y Cempasúchil"
+   ============================================================ */
+:root{
+  --pizarron:#14342B;        /* verde pizarrón profundo */
+  --pizarron-2:#1D4A3C;      /* verde pizarrón claro */
+  --pizarron-3:#0E2620;      /* verde casi tinta */
+  --papel:#FBF8F1;           /* papel crema */
+  --papel-2:#F4EFE3;         /* papel sombreado */
+  --tinta:#1F2823;           /* tinta de texto */
+  --tinta-suave:#5B6660;     /* texto secundario */
+  --cempasuchil:#F0A63A;     /* ámbar cempasúchil */
+  --cempasuchil-2:#E08E1B;
+  --rosa:#D4557B;            /* rosa mexicano, uso mínimo */
+  --salvia:#DCE7DD;          /* bordes suaves */
+  --blanco:#FFFFFF;
+  --wa:#25D366;
+  --wa-oscuro:#128C4A;
+  --radius:18px;
+  --radius-lg:28px;
+  --shadow-sm:0 2px 10px rgba(20,52,43,.07);
+  --shadow-md:0 10px 34px rgba(20,52,43,.12);
+  --shadow-lg:0 24px 70px rgba(14,38,32,.22);
+  --font-display:"Bricolage Grotesque",system-ui,sans-serif;
+  --font-body:"Figtree",system-ui,sans-serif;
+  --font-mono:"DM Mono",ui-monospace,monospace;
+  --maxw:1180px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  color:var(--tinta);
+  background:var(--papel);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+:focus-visible{outline:3px solid var(--cempasuchil);outline-offset:3px;border-radius:6px}
+::selection{background:var(--cempasuchil);color:var(--pizarron-3)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.eyebrow{
+  font-family:var(--font-mono);font-size:.78rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--cempasuchil-2);font-weight:500;
+  display:inline-flex;align-items:center;gap:.6em;
+}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--cempasuchil);border-radius:2px}
+h1,h2,h3{font-family:var(--font-display);line-height:1.08;letter-spacing:-.015em;font-weight:600}
+h2{font-size:clamp(1.9rem,4.2vw,2.9rem);color:var(--pizarron-3)}
+.section{padding:clamp(72px,9vw,120px) 0}
+.section-head{max-width:640px;margin-bottom:clamp(36px,5vw,60px)}
+.section-head p{margin-top:14px;color:var(--tinta-suave);font-size:1.08rem}
+
+/* ---------- Botones ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.6em;
+  font-weight:700;font-size:1rem;border-radius:100px;
+  padding:15px 28px;transition:transform .22s cubic-bezier(.34,1.56,.64,1),box-shadow .22s ease,background .2s ease;
+  will-change:transform;
+}
+.btn:active{transform:scale(.97)}
+.btn-wa{background:var(--wa);color:#06301A;box-shadow:0 8px 24px rgba(37,211,102,.35)}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(37,211,102,.45);background:#2BE372}
+.btn-ghost{background:transparent;color:var(--papel);border:1.5px solid rgba(251,248,241,.35)}
+.btn-ghost:hover{border-color:var(--cempasuchil);color:var(--cempasuchil);transform:translateY(-2px)}
+.btn-dark{background:var(--pizarron);color:var(--papel)}
+.btn-dark:hover{background:var(--pizarron-2);transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.wa-ico{width:20px;height:20px;flex:none}
+
+/* ---------- Navbar ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:90;
+  transition:background .3s ease,box-shadow .3s ease,backdrop-filter .3s ease;
+}
+.nav.scrolled{background:rgba(251,248,241,.88);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(20,52,43,.08)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
+.logo{display:flex;align-items:center;gap:11px}
+.logo-mark{width:40px;height:40px}
+.logo-word{font-family:var(--font-display);font-weight:700;font-size:1.42rem;letter-spacing:.02em;color:var(--pizarron-3)}
+.logo-word em{font-style:normal;color:var(--cempasuchil-2)}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{font-weight:600;font-size:.95rem;color:var(--tinta);position:relative}
+.nav-links a:not(.btn)::after{
+  content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;
+  background:var(--cempasuchil);border-radius:2px;transition:width .25s ease;
+}
+.nav-links a:not(.btn):hover::after{width:100%}
+.nav .btn{padding:10px 20px;font-size:.92rem}
+.nav.on-dark .nav-links a:not(.btn){color:var(--papel)}
+.nav.on-dark .logo-word{color:var(--papel)}
+.nav.on-dark.scrolled .nav-links a:not(.btn){color:var(--tinta)}
+.nav.on-dark.scrolled .logo-word{color:var(--pizarron-3)}
+.menu-btn{display:none;width:44px;height:44px;border-radius:12px;align-items:center;justify-content:center}
+.menu-btn svg{width:26px;height:26px;stroke:var(--papel)}
+.nav.scrolled .menu-btn svg{stroke:var(--pizarron-3)}
+.mobile-menu{
+  display:none;position:fixed;inset:0;z-index:100;background:var(--pizarron-3);
+  flex-direction:column;padding:26px 24px;gap:6px;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--papel);font-family:var(--font-display);font-size:1.7rem;font-weight:600;padding:14px 4px;border-bottom:1px solid rgba(251,248,241,.1)}
+.mobile-menu .close-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.mobile-menu .btn{margin-top:auto;justify-content:center}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;background:var(--pizarron);color:var(--papel);
+  padding:calc(74px + clamp(48px,7vw,90px)) 0 clamp(64px,8vw,110px);
+  overflow:hidden;
+}
+.hero::before{ /* trama de gis sutil */
+  content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
+  background-image:radial-gradient(rgba(251,248,241,.05) 1px,transparent 1px);
+  background-size:26px 26px;
+}
+.hero::after{ /* halo cempasúchil */
+  content:"";position:absolute;width:720px;height:720px;border-radius:50%;
+  background:radial-gradient(circle,rgba(240,166,58,.16),transparent 62%);
+  top:-220px;right:-180px;pointer-events:none;
+}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(36px,5vw,72px);align-items:center;position:relative;z-index:2}
+.hero h1{font-size:clamp(2.5rem,5.4vw,4.1rem);font-weight:700;color:var(--papel)}
+.hero h1 .subrayado{position:relative;white-space:nowrap;color:var(--cempasuchil)}
+.hero h1 .subrayado svg{position:absolute;left:0;bottom:-.14em;width:100%;height:.34em;overflow:visible}
+.hero h1 .subrayado path{stroke:var(--cempasuchil);stroke-width:7;fill:none;stroke-linecap:round;
+  stroke-dasharray:600;stroke-dashoffset:600;animation:trazo 1s ease .9s forwards}
+@keyframes trazo{to{stroke-dashoffset:0}}
+.hero-sub{margin:22px 0 32px;font-size:clamp(1.05rem,1.6vw,1.22rem);color:rgba(251,248,241,.82);max-width:520px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero-proof{display:flex;gap:26px;margin-top:40px;flex-wrap:wrap}
+.hero-proof div strong{font-family:var(--font-display);font-size:1.35rem;color:var(--cempasuchil);display:block;font-weight:700}
+.hero-proof div span{font-size:.85rem;color:rgba(251,248,241,.65)}
+.rise{opacity:0;transform:translateY(26px);animation:rise .8s cubic-bezier(.22,1,.36,1) forwards}
+.rise.d1{animation-delay:.08s}.rise.d2{animation-delay:.2s}.rise.d3{animation-delay:.34s}.rise.d4{animation-delay:.48s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* --- Elemento firma: la planeación que se escribe sola --- */
+.plan-stage{position:relative;perspective:1400px}
+.plan-card{
+  background:var(--papel);color:var(--tinta);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);padding:26px 26px 22px;
+  transform-style:preserve-3d;transform:rotateX(4deg) rotateY(-7deg);
+  transition:transform .5s cubic-bezier(.22,1,.36,1);
+  position:relative;
+}
+.plan-card::before{ /* espiral de cuaderno */
+  content:"";position:absolute;top:20px;bottom:20px;left:-9px;width:18px;
+  background-image:radial-gradient(circle 6px at 9px 10px,var(--pizarron-2) 42%,transparent 46%);
+  background-size:18px 34px;background-repeat:repeat-y;opacity:.9;
+}
+.plan-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-left:10px}
+.plan-top .tag{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--pizarron);color:var(--cempasuchil);padding:5px 12px;border-radius:100px}
+.plan-top .grado{font-family:var(--font-display);font-weight:700;color:var(--pizarron-2);font-size:.95rem}
+.plan-title{font-family:var(--font-display);font-weight:700;font-size:1.22rem;color:var(--pizarron-3);padding-left:10px;margin-bottom:14px}
+.plan-rows{display:flex;flex-direction:column;gap:9px;padding-left:10px}
+.plan-row{
+  display:grid;grid-template-columns:52px 1fr 26px;gap:12px;align-items:center;
+  background:var(--blanco);border:1px solid var(--salvia);border-radius:13px;padding:11px 14px;
+  opacity:0;transform:translateX(-14px);
+}
+.plan-row.show{animation:rowIn .5s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes rowIn{to{opacity:1;transform:none}}
+.plan-row .dia{font-family:var(--font-mono);font-size:.7rem;font-weight:500;letter-spacing:.06em;color:var(--cempasuchil-2);text-transform:uppercase}
+.plan-row .linea{font-size:.86rem;color:var(--tinta);white-space:nowrap;overflow:hidden}
+.plan-row .linea b{font-weight:700;color:var(--pizarron-2)}
+.plan-row .check{
+  width:24px;height:24px;border-radius:50%;background:var(--salvia);
+  display:flex;align-items:center;justify-content:center;transform:scale(0);
+}
+.plan-row .check.on{animation:pop .4s cubic-bezier(.34,1.6,.64,1) forwards}
+@keyframes pop{to{transform:scale(1)}}
+.plan-row .check svg{width:13px;height:13px;stroke:var(--pizarron-2);stroke-width:3}
+.plan-foot{display:flex;align-items:center;gap:9px;margin-top:16px;padding-left:10px;font-size:.82rem;color:var(--tinta-suave)}
+.plan-foot .sello{
+  width:34px;height:34px;border-radius:50%;background:var(--cempasuchil);
+  display:flex;align-items:center;justify-content:center;flex:none;
+  box-shadow:0 4px 12px rgba(240,166,58,.4);
+}
+.plan-foot .sello svg{width:18px;height:18px}
+/* búho flotante junto a la planeación */
+.buho-flotante{
+  position:absolute;width:118px;top:-58px;right:-16px;z-index:3;
+  filter:drop-shadow(0 14px 26px rgba(14,38,32,.35));
+  animation:flotar 5.5s ease-in-out infinite;
+}
+@keyframes flotar{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-13px) rotate(2deg)}}
+.chip-flotante{
+  position:absolute;background:var(--blanco);border-radius:14px;box-shadow:var(--shadow-md);
+  padding:10px 15px;display:flex;align-items:center;gap:9px;font-size:.82rem;font-weight:600;color:var(--tinta);
+  animation:flotar 6s ease-in-out infinite;z-index:3;
+}
+.chip-flotante .dot{width:9px;height:9px;border-radius:50%;background:var(--wa);flex:none;box-shadow:0 0 0 4px rgba(37,211,102,.2)}
+.chip-a{bottom:-20px;left:-26px;animation-delay:.8s}
+.chip-b{top:38%;right:-34px;animation-delay:1.6s}
+.chip-b .dot{background:var(--cempasuchil);box-shadow:0 0 0 4px rgba(240,166,58,.22)}
+
+/* ---------- Franja NEM (marquee) ---------- */
+.franja{background:var(--pizarron-3);color:rgba(251,248,241,.8);padding:15px 0;overflow:hidden;border-top:1px solid rgba(251,248,241,.08)}
+.marquee{display:flex;gap:0;width:max-content;animation:marquee 34s linear infinite}
+.marquee-set{display:flex;align-items:center;gap:44px;padding-right:44px;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.marquee-set span{display:flex;align-items:center;gap:44px}
+.marquee-set i{font-style:normal;color:var(--cempasuchil);font-size:.6rem}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- Qué recibes ---------- */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{
+  background:var(--blanco);border:1px solid var(--salvia);border-radius:var(--radius-lg);
+  padding:30px 28px;position:relative;overflow:hidden;
+  transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease,border-color .3s ease;
+  transform-style:preserve-3d;
+}
+.card:hover{transform:translateY(-7px);box-shadow:var(--shadow-md);border-color:rgba(240,166,58,.5)}
+.card .ico{
+  width:52px;height:52px;border-radius:15px;background:var(--papel-2);
+  display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .3s ease;
+}
+.card:hover .ico{transform:rotate(-6deg) scale(1.08);background:#FBEFD8}
+.card .ico svg{width:26px;height:26px;stroke:var(--pizarron-2);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:1.18rem;margin-bottom:9px;color:var(--pizarron-3)}
+.card p{font-size:.94rem;color:var(--tinta-suave)}
+.card .pico{ /* triángulo papel picado en esquina */
+  position:absolute;top:0;right:0;width:0;height:0;
+  border-top:44px solid var(--papel-2);border-left:44px solid transparent;
+  transition:border-top-color .3s ease;
+}
+.card:hover .pico{border-top-color:var(--cempasuchil)}
+
+/* ---------- Cómo funciona ---------- */
+.pasos-sec{background:var(--pizarron);color:var(--papel);position:relative;overflow:hidden}
+.pasos-sec::before{content:"";position:absolute;inset:0;opacity:.45;
+  background-image:radial-gradient(rgba(251,248,241,.05) 1px,transparent 1px);background-size:26px 26px}
+.pasos-sec h2{color:var(--papel)}
+.pasos-sec .section-head p{color:rgba(251,248,241,.7)}
+.pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;position:relative;z-index:1}
+.paso{
+  background:rgba(251,248,241,.05);border:1px solid rgba(251,248,241,.13);
+  border-radius:var(--radius-lg);padding:34px 28px;position:relative;
+  transition:background .3s ease,transform .35s cubic-bezier(.22,1,.36,1);
+}
+.paso:hover{background:rgba(251,248,241,.09);transform:translateY(-5px)}
+.paso .num{
+  font-family:var(--font-display);font-weight:700;font-size:2.6rem;color:var(--cempasuchil);
+  line-height:1;margin-bottom:18px;display:flex;align-items:baseline;gap:10px;
+}
+.paso .num small{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(251,248,241,.5);font-weight:400}
+.paso h3{font-size:1.2rem;color:var(--papel);margin-bottom:10px}
+.paso p{font-size:.94rem;color:rgba(251,248,241,.72)}
+.paso .flecha{position:absolute;top:50%;right:-19px;transform:translateY(-50%);z-index:2}
+.paso .flecha svg{width:30px;height:30px;stroke:var(--cempasuchil);stroke-width:2;fill:none}
+.pasos-cta{text-align:center;margin-top:52px;position:relative;z-index:1}
+
+/* ---------- Beneficios ---------- */
+.benef-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,70px);align-items:center}
+.benef-lista{display:flex;flex-direction:column;gap:8px;margin-top:26px}
+.benef-item{display:flex;gap:16px;padding:16px 18px;border-radius:16px;transition:background .25s ease}
+.benef-item:hover{background:var(--blanco)}
+.benef-item .bico{
+  width:42px;height:42px;border-radius:12px;background:#FBEFD8;flex:none;
+  display:flex;align-items:center;justify-content:center;
+}
+.benef-item .bico svg{width:21px;height:21px;stroke:var(--cempasuchil-2);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.benef-item h4{font-family:var(--font-display);font-size:1.02rem;color:var(--pizarron-3)}
+.benef-item p{font-size:.9rem;color:var(--tinta-suave)}
+.pizarra-domingo{
+  background:var(--pizarron);border-radius:var(--radius-lg);padding:clamp(30px,4vw,48px);
+  color:var(--papel);position:relative;overflow:hidden;box-shadow:var(--shadow-lg);
+  border:10px solid #0B1E19;
+}
+.pizarra-domingo::before{content:"";position:absolute;inset:0;
+  background-image:radial-gradient(rgba(251,248,241,.06) 1px,transparent 1px);background-size:22px 22px}
+.pizarra-domingo .gis-titulo{font-family:var(--font-display);font-weight:600;font-size:clamp(1.5rem,2.6vw,2rem);position:relative}
+.pizarra-domingo .tachado{position:relative;color:rgba(251,248,241,.5)}
+.pizarra-domingo .tachado::after{content:"";position:absolute;left:-2%;top:52%;width:104%;height:3px;background:var(--rosa);border-radius:3px;transform:rotate(-2deg)}
+.pizarra-domingo .gis-sub{color:var(--cempasuchil);font-family:var(--font-display);font-weight:700;font-size:clamp(1.7rem,3vw,2.3rem);margin-top:10px;position:relative}
+.pizarra-domingo .horas{display:flex;gap:28px;margin-top:34px;position:relative}
+.pizarra-domingo .horas strong{font-family:var(--font-display);font-size:2rem;color:var(--papel);display:block;font-weight:700}
+.pizarra-domingo .horas span{font-size:.82rem;color:rgba(251,248,241,.65)}
+
+/* ---------- Materiales (tabs) ---------- */
+.tabs-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:30px}
+.tab-btn{
+  padding:11px 22px;border-radius:100px;font-weight:600;font-size:.93rem;color:var(--tinta-suave);
+  border:1.5px solid var(--salvia);background:var(--blanco);transition:all .25s ease;
+}
+.tab-btn:hover{border-color:var(--cempasuchil);color:var(--pizarron-3)}
+.tab-btn.active{background:var(--pizarron);color:var(--papel);border-color:var(--pizarron)}
+.tab-panel{display:none;animation:fadeUp .45s cubic-bezier(.22,1,.36,1)}
+.tab-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);align-items:center}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.tab-txt h3{font-size:1.5rem;color:var(--pizarron-3);margin-bottom:12px}
+.tab-txt p{color:var(--tinta-suave);margin-bottom:18px}
+.tab-txt ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.tab-txt li{display:flex;gap:10px;font-size:.95rem;align-items:flex-start}
+.tab-txt li svg{width:19px;height:19px;flex:none;margin-top:2px;stroke:var(--cempasuchil-2);stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.tab-mock{
+  background:var(--blanco);border:1px solid var(--salvia);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-md);padding:22px;min-height:300px;
+}
+.mock-bar{display:flex;gap:6px;margin-bottom:16px}
+.mock-bar i{width:10px;height:10px;border-radius:50%;background:var(--salvia)}
+.mock-bar i:first-child{background:var(--rosa)}
+.mock-bar i:nth-child(2){background:var(--cempasuchil)}
+.mock-bar i:nth-child(3){background:var(--pizarron-2)}
+.mock-line{height:11px;border-radius:6px;background:var(--papel-2);margin-bottom:10px}
+.mock-line.w80{width:80%}.mock-line.w60{width:60%}.mock-line.w90{width:90%}.mock-line.w45{width:45%}
+.mock-line.titulo{height:18px;width:55%;background:var(--pizarron-2);opacity:.85;margin-bottom:16px}
+.mock-bloque{background:var(--papel-2);border-radius:12px;padding:14px;margin-bottom:12px;display:flex;gap:12px;align-items:center}
+.mock-bloque .mini{width:38px;height:38px;border-radius:10px;background:var(--cempasuchil);opacity:.8;flex:none}
+.mock-bloque .mlines{flex:1}
+.mock-bloque .mlines div{height:8px;border-radius:4px;background:rgba(20,52,43,.14);margin-bottom:7px}
+.mock-bloque .mlines div:last-child{width:65%;margin-bottom:0}
+.mock-juego{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mock-juego b{aspect-ratio:1;border-radius:12px;background:var(--papel-2);display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-weight:700;color:var(--pizarron-2);font-size:1.3rem;transition:transform .2s ease,background .2s ease;cursor:default}
+.mock-juego b:hover{transform:scale(1.07) rotate(-3deg);background:#FBEFD8}
+.mock-eval{display:flex;flex-direction:column;gap:10px}
+.mock-eval .fila{display:flex;align-items:center;gap:12px;background:var(--papel-2);border-radius:11px;padding:11px 14px}
+.mock-eval .fila i{width:20px;height:20px;border-radius:6px;border:2px solid var(--pizarron-2);flex:none;display:flex;align-items:center;justify-content:center}
+.mock-eval .fila i svg{width:12px;height:12px;stroke:var(--pizarron-2);stroke-width:3.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.mock-eval .fila span{height:9px;border-radius:5px;background:rgba(20,52,43,.14);flex:1}
+
+/* ---------- Confianza ---------- */
+.conf-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.conf-item{
+  background:var(--blanco);border:1px solid var(--salvia);border-radius:var(--radius-lg);
+  padding:32px;display:flex;gap:20px;transition:transform .3s ease,box-shadow .3s ease;
+}
+.conf-item:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.conf-item .cico{width:52px;height:52px;border-radius:16px;background:var(--pizarron);flex:none;display:flex;align-items:center;justify-content:center}
+.conf-item .cico svg{width:25px;height:25px;stroke:var(--cempasuchil);stroke-width:1.9;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.conf-item h3{font-size:1.13rem;color:var(--pizarron-3);margin-bottom:7px}
+.conf-item p{font-size:.93rem;color:var(--tinta-suave)}
+
+/* ---------- Testimonios ---------- */
+.testi-sec{background:var(--papel-2)}
+.testis{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.testi{
+  background:var(--blanco);border-radius:var(--radius-lg);padding:32px 28px;
+  box-shadow:var(--shadow-sm);position:relative;display:flex;flex-direction:column;gap:18px;
+  transition:transform .3s ease,box-shadow .3s ease;
+}
+.testi:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
+.testi .comilla{font-family:var(--font-display);font-size:3.4rem;line-height:.6;color:var(--cempasuchil);font-weight:700}
+.testi p{font-size:.97rem;color:var(--tinta);flex:1}
+.testi .quien{display:flex;align-items:center;gap:13px}
+.testi .avatar{
+  width:46px;height:46px;border-radius:50%;flex:none;
+  font-family:var(--font-display);font-weight:700;color:var(--papel);
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+}
+.testi .quien strong{display:block;font-size:.93rem;color:var(--pizarron-3)}
+.testi .quien span{font-size:.8rem;color:var(--tinta-suave)}
+.estrellas{display:flex;gap:3px}
+.estrellas svg{width:16px;height:16px;fill:var(--cempasuchil)}
+
+/* ---------- FAQ ---------- */
+.faq-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(32px,5vw,70px);align-items:start}
+.faq-lado .buho-faq{width:150px;margin-top:28px}
+.faq{border-bottom:1px solid var(--salvia)}
+.faq summary{
+  list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:22px 4px;cursor:pointer;font-family:var(--font-display);font-weight:600;
+  font-size:1.06rem;color:var(--pizarron-3);
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .mas{
+  width:30px;height:30px;border-radius:50%;background:var(--papel-2);flex:none;
+  display:flex;align-items:center;justify-content:center;transition:transform .3s ease,background .3s ease;
+}
+.faq summary .mas svg{width:14px;height:14px;stroke:var(--pizarron-2);stroke-width:2.6;fill:none;stroke-linecap:round}
+.faq[open] summary .mas{transform:rotate(45deg);background:var(--cempasuchil)}
+.faq .resp{padding:0 4px 24px;color:var(--tinta-suave);font-size:.96rem;max-width:60ch}
+
+/* ---------- CTA final ---------- */
+.cta-final{
+  background:linear-gradient(150deg,var(--pizarron) 0%,var(--pizarron-3) 100%);
+  border-radius:var(--radius-lg);padding:clamp(48px,7vw,84px) clamp(26px,5vw,72px);
+  color:var(--papel);text-align:center;position:relative;overflow:hidden;
+  box-shadow:var(--shadow-lg);
+}
+.cta-final::before{content:"";position:absolute;inset:0;
+  background-image:radial-gradient(rgba(251,248,241,.06) 1px,transparent 1px);background-size:24px 24px}
+.cta-final::after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(240,166,58,.2),transparent 65%);bottom:-260px;left:50%;transform:translateX(-50%)}
+.cta-final .buho-cta{width:96px;margin:0 auto 22px;position:relative;z-index:1;animation:flotar 5s ease-in-out infinite}
+.cta-final h2{color:var(--papel);font-size:clamp(1.9rem,4vw,3rem);position:relative;z-index:1}
+.cta-final h2 em{font-style:normal;color:var(--cempasuchil)}
+.cta-final p{margin:16px auto 34px;color:rgba(251,248,241,.78);max-width:480px;position:relative;z-index:1}
+.cta-final .btn{position:relative;z-index:1;font-size:1.08rem;padding:18px 36px}
+.cta-final .nota{margin-top:18px;font-size:.83rem;color:rgba(251,248,241,.55);position:relative;z-index:1}
+
+/* ---------- Footer ---------- */
+.footer{background:var(--pizarron-3);color:rgba(251,248,241,.7);padding:56px 0 32px;margin-top:clamp(72px,9vw,120px)}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:44px}
+.footer .logo-word{color:var(--papel)}
+.footer p{font-size:.9rem;max-width:34ch;margin-top:14px}
+.footer h5{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cempasuchil);margin-bottom:16px;font-weight:500}
+.footer ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer ul a{font-size:.92rem;transition:color .2s ease}
+.footer ul a:hover{color:var(--cempasuchil)}
+.footer-base{border-top:1px solid rgba(251,248,241,.1);padding-top:26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem;color:rgba(251,248,241,.45)}
+
+/* ---------- WhatsApp flotante ---------- */
+.wa-float{
+  position:fixed;bottom:24px;right:24px;z-index:80;
+  width:62px;height:62px;border-radius:50%;background:var(--wa);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 30px rgba(18,140,74,.45);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1);
+}
+.wa-float:hover{transform:scale(1.1) rotate(6deg)}
+.wa-float svg{width:32px;height:32px}
+.wa-float::before{
+  content:"";position:absolute;inset:0;border-radius:50%;background:var(--wa);
+  animation:pulso 2.4s ease-out infinite;z-index:-1;
+}
+@keyframes pulso{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.65);opacity:0}}
+.wa-tip{
+  position:fixed;bottom:38px;right:98px;z-index:80;background:var(--blanco);
+  padding:10px 16px;border-radius:14px 14px 4px 14px;box-shadow:var(--shadow-md);
+  font-size:.86rem;font-weight:600;color:var(--tinta);
+  opacity:0;transform:translateY(8px);pointer-events:none;
+  transition:opacity .4s ease,transform .4s ease;
+}
+.wa-tip.show{opacity:1;transform:none}
+
+/* ---------- Responsive ---------- */
+@media(max-width:980px){
+  .cards,.testis{grid-template-columns:1fr 1fr}
+  .pasos{grid-template-columns:1fr}
+  .paso .flecha{display:none}
+  .hero-grid{grid-template-columns:1fr;gap:56px}
+  .plan-card{transform:none;max-width:520px;margin:0 auto}
+  .benef-grid,.faq-grid,.tab-panel.active{grid-template-columns:1fr}
+  .faq-lado .buho-faq{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  .nav-links{display:none}
+  .menu-btn{display:flex}
+  .cards,.testis,.conf-grid{grid-template-columns:1fr}
+  .hero h1 .subrayado{white-space:normal}
+  .buho-flotante{width:84px;top:-42px;right:0}
+  .chip-b{right:-8px}
+  .chip-a{left:-8px}
+  .hero-ctas .btn{width:100%;justify-content:center}
+  .footer-grid{grid-template-columns:1fr}
+  .wa-tip{display:none}
+  .hero-proof{gap:18px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+  .rise,.reveal,.plan-row{opacity:1 !important;transform:none !important}
+  .plan-row .check{transform:scale(1)}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== SVG: marca EDUVO (búho) ==================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Búho geométrico EDUVO -->
+    <g id="buho">
+      <ellipse cx="60" cy="78" rx="34" ry="38" fill="#1D4A3C"/>
+      <path d="M26 62 Q60 34 94 62 L94 82 Q60 60 26 82 Z" fill="#14342B"/>
+      <path d="M32 46 L44 30 L50 48 Z" fill="#14342B"/>
+      <path d="M88 46 L76 30 L70 48 Z" fill="#14342B"/>
+      <circle cx="44" cy="62" r="15" fill="#FBF8F1"/>
+      <circle cx="76" cy="62" r="15" fill="#FBF8F1"/>
+      <circle cx="44" cy="62" r="15" fill="none" stroke="#F0A63A" stroke-width="3.5"/>
+      <circle cx="76" cy="62" r="15" fill="none" stroke="#F0A63A" stroke-width="3.5"/>
+      <line x1="59" y1="62" x2="61" y2="62" stroke="#F0A63A" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="46" cy="64" r="5.5" fill="#14342B"/>
+      <circle cx="78" cy="64" r="5.5" fill="#14342B"/>
+      <circle cx="48" cy="62" r="1.8" fill="#FBF8F1"/>
+      <circle cx="80" cy="62" r="1.8" fill="#FBF8F1"/>
+      <path d="M55 76 L65 76 L60 85 Z" fill="#F0A63A"/>
+      <path d="M42 96 Q60 106 78 96 Q60 116 42 96 Z" fill="#F0A63A" opacity=".9"/>
+      <path d="M30 84 Q22 96 30 106 Q38 98 36 86 Z" fill="#14342B"/>
+      <path d="M90 84 Q98 96 90 106 Q82 98 84 86 Z" fill="#14342B"/>
+    </g>
+    <!-- Logotipo (isotipo compacto) -->
+    <g id="marca">
+      <rect x="4" y="4" width="92" height="92" rx="26" fill="#14342B"/>
+      <circle cx="36" cy="46" r="13" fill="#FBF8F1"/>
+      <circle cx="64" cy="46" r="13" fill="#FBF8F1"/>
+      <circle cx="36" cy="46" r="13" fill="none" stroke="#F0A63A" stroke-width="3.4"/>
+      <circle cx="64" cy="46" r="13" fill="none" stroke="#F0A63A" stroke-width="3.4"/>
+      <circle cx="38" cy="48" r="4.8" fill="#14342B"/>
+      <circle cx="66" cy="48" r="4.8" fill="#14342B"/>
+      <path d="M45 62 L55 62 L50 70 Z" fill="#F0A63A"/>
+      <path d="M26 26 L34 16 L38 28 Z" fill="#FBF8F1" opacity=".9"/>
+      <path d="M74 26 L66 16 L62 28 Z" fill="#FBF8F1" opacity=".9"/>
+    </g>
+  </defs>
+</svg>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav on-dark" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="logo" aria-label="EDUVO inicio">
+      <svg class="logo-mark" viewBox="0 0 100 100"><use href="#marca"/></svg>
+      <span class="logo-word">EDU<em>VO</em></span>
+    </a>
+    <div class="nav-links">
+      <a href="#servicios">Qué recibes</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#materiales">Materiales</a>
+      <a href="#faq">Preguntas</a>
+      <a href="#" class="btn btn-wa" data-wa data-msg="Hola EDUVO 👋 Quiero información sobre las planeaciones semanales.">
+        <svg class="wa-ico" viewBox="0 0 24 24" fill="#06301A"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.4-.7-2.9-1.1-4.7-4-4.9-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.2.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 .9c.3.2.5.3.6.4 0 .1 0 .5-.2 1z"/></svg>
+        Hablar por WhatsApp
+      </a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Menú móvil -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="close-row">
+    <span class="logo-word" style="color:var(--papel)">EDU<em>VO</em></span>
+    <button class="menu-btn" id="closeBtn" aria-label="Cerrar menú" style="display:flex">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#FBF8F1" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <a href="#servicios">Qué recibes</a>
+  <a href="#como-funciona">Cómo funciona</a>
+  <a href="#materiales">Materiales</a>
+  <a href="#confianza">Por qué confiar</a>
+  <a href="#faq">Preguntas frecuentes</a>
+  <a href="#" class="btn btn-wa" data-wa data-msg="Hola EDUVO 👋 Quiero información sobre las planeaciones semanales.">
+    <svg class="wa-ico" viewBox="0 0 24 24" fill="#06301A"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.4-.7-2.9-1.1-4.7-4-4.9-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.2.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 .9c.3.2.5.3.6.4 0 .1 0 .5-.2 1z"/></svg>
+    Hablar por WhatsApp
+  </a>
+</div>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow rise d1" style="color:var(--cempasuchil)">Planeaciones para primaria · Nueva Escuela Mexicana</span>
+      <h1 class="rise d2" style="margin-top:18px">
+        Tu planeación de la semana,
+        <span class="subrayado">lista antes del lunes<svg viewBox="0 0 300 20" preserveAspectRatio="none"><path d="M4 14 Q 80 4 150 11 T 296 9"/></svg></span>
+      </h1>
+      <p class="hero-sub rise d3">
+        Planeaciones completas, actividades diarias, materiales listos para imprimir y evaluaciones —
+        hechas para tu grupo, tu grado y tu comunidad. Tú enseñas; del papeleo nos encargamos nosotros.
+      </p>
+      <div class="hero-ctas rise d4">
+        <a href="#" class="btn btn-wa" data-wa data-msg="Hola EDUVO 👋 Soy docente de primaria y quiero mi planeación semanal. ¿Me pueden dar información?">
+          <svg class="wa-ico" viewBox="0 0 24 24" fill="#06301A"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.4-.7-2.9-1.1-4.7-4-4.9-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.2.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 .9c.3.2.5.3.6.4 0 .1 0 .5-.2 1z"/></svg>
+          Quiero mi planeación
+        </a>
+        <a href="#materiales" class="btn btn-ghost">Ver qué incluye</a>
+      </div>
+      <div class="hero-proof rise d4">
+        <div><strong>1º a 6º</strong><span>Todos los grados</span></div>
+        <div><strong>100% NEM</strong><span>Formato oficial</span></div>
+        <div><strong>Cada semana</strong><span>Entrega puntual</span></div>
+      </div>
+    </div>
+
+    <!-- Elemento firma: la planeación que se escribe sola -->
+    <div class="plan-stage rise d3">
+      <svg class="buho-flotante" viewBox="0 0 120 120" aria-hidden="true"><use href="#buho"/></svg>
+      <div class="plan-card" id="planCard">
+        <div class="plan-top">
+          <span class="tag">Planeación semanal</span>
+          <span class="grado">3º de primaria</span>
+        </div>
+        <div class="plan-title" id="planTitle">Proyecto: Los ecosistemas de mi comunidad</div>
+        <div class="plan-rows" id="planRows">
+          <div class="plan-row" data-delay="0">
+            <span class="dia">Lun</span>
+            <span class="linea"><b>Inicio.</b> Exploración: ¿qué seres vivos hay cerca?</span>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></span>
+          </div>
+          <div class="plan-row" data-delay="420">
+            <span class="dia">Mar</span>
+            <span class="linea"><b>Desarrollo.</b> Recorrido y registro de observaciones</span>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></span>
+          </div>
+          <div class="plan-row" data-delay="840">
+            <span class="dia">Mié</span>
+            <span class="linea"><b>Desarrollo.</b> Cadenas alimentarias con material impreso</span>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></span>
+          </div>
+          <div class="plan-row" data-delay="1260">
+            <span class="dia">Jue</span>
+            <span class="linea"><b>Juego.</b> Memorama interactivo de ecosistemas</span>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></span>
+          </div>
+          <div class="plan-row" data-delay="1680">
+            <span class="dia">Vie</span>
+            <span class="linea"><b>Cierre.</b> Presentación y evaluación con rúbrica</span>
+            <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></span>
+          </div>
+        </div>
+        <div class="plan-foot">
+          <span class="sello">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#14342B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>
+          </span>
+          Alineada a la NEM · Con materiales, tareas y evaluación incluidos
+        </div>
+      </div>
+      <div class="chip-flotante chip-a"><span class="dot"></span> Entregada por WhatsApp</div>
+      <div class="chip-flotante chip-b"><span class="dot"></span> Lista para imprimir</div>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== FRANJA NEM ==================== -->
+<div class="franja" aria-hidden="true">
+  <div class="marquee">
+    <div class="marquee-set">
+      <span>Nueva Escuela Mexicana <i>◆</i> Campos formativos <i>◆</i> Programa sintético y analítico <i>◆</i> Metodologías activas <i>◆</i> Evaluación formativa <i>◆</i> 1º a 6º de primaria <i>◆</i></span>
+    </div>
+    <div class="marquee-set">
+      <span>Nueva Escuela Mexicana <i>◆</i> Campos formativos <i>◆</i> Programa sintético y analítico <i>◆</i> Metodologías activas <i>◆</i> Evaluación formativa <i>◆</i> 1º a 6º de primaria <i>◆</i></span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== QUÉ RECIBES ==================== -->
+<section class="section" id="servicios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Qué recibes</span>
+      <h2 style="margin-top:14px">Todo lo que tu semana necesita, en un solo lugar</h2>
+      <p>No son plantillas genéricas: cada entrega se prepara para tu grado, tu contexto y tu forma de trabajar.</p>
+    </div>
+    <div class="cards">
+      <div class="card reveal">
+        <span class="pico"></span>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 4h13l3 3v13H4z"/><path d="M8 4v5h8V4"/><path d="M8 14h8M8 17h5"/></svg></div>
+        <h3>Planeación semanal completa</h3>
+        <p>Secuencia didáctica día por día con inicio, desarrollo y cierre, alineada al programa vigente y lista para entregar a dirección.</p>
+      </div>
+      <div class="card reveal">
+        <span class="pico"></span>
+        <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Actividades diarias</h3>
+        <p>Actividades y tareas calibradas a la realidad de tu comunidad: aplicables, claras y pensadas para tus alumnos, no para un aula ideal.</p>
+      </div>
+      <div class="card reveal">
+        <span class="pico"></span>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 20V9l6-5 6 5v11"/><path d="M10 20v-6h4v6"/></svg></div>
+        <h3>Proyectos por campo formativo</h3>
+        <p>Proyectos comunitarios, de aula y escolares con las metodologías activas que pide la NEM, desarrollados de principio a fin.</p>
+      </div>
+      <div class="card reveal">
+        <span class="pico"></span>
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/></svg></div>
+        <h3>Materiales listos para imprimir</h3>
+        <p>Fichas, imágenes, láminas y recursos visuales diseñados para cada actividad. Los imprimes y a trabajar.</p>
+      </div>
+      <div class="card reveal">
+        <span class="pico"></span>
+        <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3"/><circle cx="8.5" cy="12" r="1.6"/><path d="M14 10.5v3M15.5 12h-3"/></svg></div>
+        <h3>Juego interactivo semanal</h3>
+        <p>Un juego digital ligado al tema de la semana para repasar en clase o en casa. Aprende jugando, literalmente.</p>
+      </div>
+      <div class="card reveal">
+        <span class="pico"></span>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></div>
+        <h3>Evaluación e instrumentos</h3>
+        <p>Rúbricas, listas de cotejo y evaluaciones formativas coherentes con lo que trabajaste — no evaluaciones sueltas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CÓMO FUNCIONA ==================== -->
+<section class="section pasos-sec" id="como-funciona">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Cómo funciona</span>
+      <h2 style="margin-top:14px">Tres pasos y tu semana queda resuelta</h2>
+      <p>Sin plataformas complicadas ni registros eternos. Todo pasa donde ya estás: tu WhatsApp.</p>
+    </div>
+    <div class="pasos">
+      <div class="paso reveal">
+        <div class="num">1 <small>Escríbenos</small></div>
+        <h3>Cuéntanos de tu grupo</h3>
+        <p>Nos dices tu grado, tu escuela y cómo es tu comunidad. Con eso preparamos planeaciones que de verdad funcionan en tu salón.</p>
+        <span class="flecha"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+      <div class="paso reveal">
+        <div class="num">2 <small>Recibe</small></div>
+        <h3>Tu semana llega lista</h3>
+        <p>Cada semana recibes tu planeación completa con actividades, materiales, juego y evaluación. Puntual, sin que tengas que perseguir a nadie.</p>
+        <span class="flecha"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+      <div class="paso reveal">
+        <div class="num">3 <small>Enseña</small></div>
+        <h3>Tú a lo tuyo: enseñar</h3>
+        <p>Imprimes, entregas a dirección y das tu clase con todo resuelto. ¿Necesitas un ajuste? Nos escribes y lo corregimos rápido.</p>
+      </div>
+    </div>
+    <div class="pasos-cta reveal">
+      <a href="#" class="btn btn-wa" data-wa data-msg="Hola EDUVO 👋 Quiero empezar. Les cuento de mi grupo: soy docente de ____ grado.">
+        <svg class="wa-ico" viewBox="0 0 24 24" fill="#06301A"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.4-.7-2.9-1.1-4.7-4-4.9-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.2.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 .9c.3.2.5.3.6.4 0 .1 0 .5-.2 1z"/></svg>
+        Empezar por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BENEFICIOS ==================== -->
+<section class="section" id="beneficios">
+  <div class="wrap benef-grid">
+    <div class="reveal">
+      <span class="eyebrow">Tu tiempo de vuelta</span>
+      <h2 style="margin-top:14px">Los domingos son para descansar, no para planear</h2>
+      <div class="benef-lista">
+        <div class="benef-item">
+          <div class="bico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <div><h4>Recupera horas cada semana</h4><p>Las tardes y fines de semana que hoy se van en formatos, vuelven a ser tuyos.</p></div>
+        </div>
+        <div class="benef-item">
+          <div class="bico"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <div><h4>Entrega a dirección sin pendientes</h4><p>Formato institucional completo y cuidado: llegas con todo en orden, siempre.</p></div>
+        </div>
+        <div class="benef-item">
+          <div class="bico"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></div>
+          <div><h4>Clases con más intención</h4><p>Con la logística resuelta, tu energía se va a lo que importa: tus alumnos.</p></div>
+        </div>
+        <div class="benef-item">
+          <div class="bico"><svg viewBox="0 0 24 24"><path d="M8 10h8M8 14h5"/><path d="M21 12a9 9 0 1 1-4-7.5L21 3l-1 4z"/></svg></div>
+          <div><h4>Atención humana y rápida</h4><p>Nos escribes por WhatsApp y te responde una persona que entiende tu realidad docente.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="pizarra-domingo">
+        <div class="gis-titulo"><span class="tachado">Domingo: hacer la planeación</span></div>
+        <div class="gis-sub">Domingo: descansar ✦</div>
+        <div class="horas">
+          <div><strong>6–10 h</strong><span>recuperadas por semana</span></div>
+          <div><strong>5 días</strong><span>planeados al detalle</span></div>
+          <div><strong>1 chat</strong><span>para resolver todo</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MATERIALES (TABS) ==================== -->
+<section class="section" id="materiales" style="background:var(--papel-2)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Lo que llega a tus manos</span>
+      <h2 style="margin-top:14px">Así se ve una semana con EDUVO</h2>
+      <p>Cada entrega incluye cinco piezas que trabajan juntas. Explóralas:</p>
+    </div>
+    <div class="reveal">
+      <div class="tabs-bar" role="tablist" aria-label="Materiales de la semana">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="t1">📘 Planeación</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="t2">✏️ Tareas</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="t3">🖨️ Materiales</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="t4">🎮 Juego</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="t5">✅ Evaluación</button>
+      </div>
+
+      <div class="tab-panel active" id="t1" role="tabpanel">
+        <div class="tab-txt">
+          <h3>La planeación completa, en formato oficial</h3>
+          <p>Documento institucional con todo lo que dirección espera ver y todo lo que tú necesitas para dar la clase.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Secuencia didáctica día por día</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Contenidos y procesos de desarrollo de aprendizaje oficiales</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Adecuaciones para atender la diversidad de tu aula</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Portada, ficha técnica y espacio de reflexión docente</li>
+          </ul>
+        </div>
+        <div class="tab-mock" aria-hidden="true">
+          <div class="mock-bar"><i></i><i></i><i></i></div>
+          <div class="mock-line titulo"></div>
+          <div class="mock-line w90"></div>
+          <div class="mock-line w80"></div>
+          <div class="mock-line w60"></div>
+          <div class="mock-bloque"><div class="mini"></div><div class="mlines"><div></div><div></div></div></div>
+          <div class="mock-bloque"><div class="mini" style="background:var(--pizarron-2)"></div><div class="mlines"><div></div><div></div></div></div>
+          <div class="mock-line w45"></div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="t2" role="tabpanel">
+        <div class="tab-txt">
+          <h3>Tareas que sí se pueden hacer en casa</h3>
+          <p>Actividades para la familia calibradas a la realidad de tu comunidad: sin pedir materiales imposibles ni internet que no hay.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Una tarea por día, ligada a lo visto en clase</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Instrucciones claras para madres y padres</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Con materiales que cualquier hogar tiene</li>
+          </ul>
+        </div>
+        <div class="tab-mock" aria-hidden="true">
+          <div class="mock-bar"><i></i><i></i><i></i></div>
+          <div class="mock-line titulo" style="width:40%"></div>
+          <div class="mock-eval">
+            <div class="fila"><i><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></i><span></span></div>
+            <div class="fila"><i><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></i><span></span></div>
+            <div class="fila"><i></i><span></span></div>
+            <div class="fila"><i></i><span></span></div>
+            <div class="fila"><i></i><span></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="t3" role="tabpanel">
+        <div class="tab-txt">
+          <h3>Materiales visuales listos para imprimir</h3>
+          <p>Fichas, láminas e imágenes diseñadas para cada actividad. Nada de buscar recursos a las 11 de la noche.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Imágenes y fichas hechas para tu tema de la semana</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Diseño claro, bonito y en blanco y negro amigable</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Organizado por día para imprimir de una vez</li>
+          </ul>
+        </div>
+        <div class="tab-mock" aria-hidden="true">
+          <div class="mock-bar"><i></i><i></i><i></i></div>
+          <div class="mock-juego" style="grid-template-columns:repeat(2,1fr)">
+            <b style="aspect-ratio:1.4;font-size:1rem">🖼️</b>
+            <b style="aspect-ratio:1.4;font-size:1rem">📄</b>
+            <b style="aspect-ratio:1.4;font-size:1rem">✂️</b>
+            <b style="aspect-ratio:1.4;font-size:1rem">🗂️</b>
+          </div>
+          <div class="mock-line w80" style="margin-top:14px"></div>
+          <div class="mock-line w60"></div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="t4" role="tabpanel">
+        <div class="tab-txt">
+          <h3>Un juego interactivo cada semana</h3>
+          <p>Un juego digital sobre el tema que estás enseñando. Ábrelo en el celular, la computadora o el proyector del aula.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Memoramas, trivias, sopas de letras y retos</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Funciona en cualquier dispositivo, sin instalar nada</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Ideal para repaso en clase o en casa</li>
+          </ul>
+        </div>
+        <div class="tab-mock" aria-hidden="true">
+          <div class="mock-bar"><i></i><i></i><i></i></div>
+          <div class="mock-line titulo" style="width:48%"></div>
+          <div class="mock-juego">
+            <b>A</b><b>?</b><b>B</b><b>?</b><b>?</b><b>C</b><b>?</b><b>A</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="t5" role="tabpanel">
+        <div class="tab-txt">
+          <h3>Evaluación coherente con tu semana</h3>
+          <p>Instrumentos de evaluación formativa que corresponden exactamente a lo que trabajaste, no formatos genéricos.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Rúbricas y listas de cotejo por proyecto</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Evaluación diagnóstica, formativa y de cierre</li>
+            <li><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg> Listas para llenar y archivar como evidencia</li>
+          </ul>
+        </div>
+        <div class="tab-mock" aria-hidden="true">
+          <div class="mock-bar"><i></i><i></i><i></i></div>
+          <div class="mock-line titulo" style="width:52%"></div>
+          <div class="mock-eval">
+            <div class="fila"><i><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></i><span></span></div>
+            <div class="fila"><i><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></i><span></span></div>
+            <div class="fila"><i><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></i><span></span></div>
+            <div class="fila"><i></i><span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="text-align:center;margin-top:44px">
+      <a href="#" class="btn btn-dark" data-wa data-msg="Hola EDUVO 👋 ¿Me pueden mandar un ejemplo de una semana completa (planeación, materiales y juego)?">
+        Pedir un ejemplo real por WhatsApp →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CONFIANZA ==================== -->
+<section class="section" id="confianza">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Por qué confiar en EDUVO</span>
+      <h2 style="margin-top:14px">Hecho con criterio pedagógico, no al aventón</h2>
+      <p>Detrás de cada planeación hay un equipo que conoce la NEM, el aula mexicana y lo que significa tu carga de trabajo.</p>
+    </div>
+    <div class="conf-grid">
+      <div class="conf-item reveal">
+        <div class="cico"><svg viewBox="0 0 24 24"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 10v6"/></svg></div>
+        <div>
+          <h3>Equipo pedagógico real</h3>
+          <p>Pedagogas con formación universitaria y experiencia en la Nueva Escuela Mexicana revisan la calidad de lo que recibes.</p>
+        </div>
+      </div>
+      <div class="conf-item reveal">
+        <div class="cico"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div>
+          <h3>Formato oficial, sin sorpresas</h3>
+          <p>Estructura institucional completa alineada al programa vigente: lo entregas a dirección con total tranquilidad.</p>
+        </div>
+      </div>
+      <div class="conf-item reveal">
+        <div class="cico"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-8-8"/><path d="M20 4l-8 8"/><path d="M15 4h5v5"/></svg></div>
+        <div>
+          <h3>Adaptado a tu contexto</h3>
+          <p>Tu estado, tu comunidad y tu grupo importan: las actividades se piensan para tu realidad, no para un aula imaginaria.</p>
+        </div>
+      </div>
+      <div class="conf-item reveal">
+        <div class="cico"><svg viewBox="0 0 24 24"><path d="M8 10h8M8 14h5"/><path d="M21 12a9 9 0 1 1-4-7.5L21 3l-1 4z"/></svg></div>
+        <div>
+          <h3>Atención rápida por WhatsApp</h3>
+          <p>¿Un ajuste, una duda, un cambio de última hora? Escribes y te respondemos rápido. Sin tickets ni correos perdidos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TESTIMONIOS ==================== -->
+<section class="section testi-sec" id="testimonios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Voces del magisterio</span>
+      <h2 style="margin-top:14px">Docentes que ya recuperaron su tiempo</h2>
+    </div>
+    <div class="testis">
+      <div class="testi reveal">
+        <span class="comilla">“</span>
+        <p>Antes me quedaba los domingos hasta la noche armando la planeación. Ahora me llega lista, con todo y materiales. Mi directora quedó encantada con el formato.</p>
+        <div class="quien">
+          <span class="avatar" style="background:var(--pizarron-2)">MG</span>
+          <div><strong>Mtra. María G.</strong><span>4º grado · Hidalgo</span></div>
+        </div>
+        <div class="estrellas" aria-label="5 estrellas">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7-6.2-3.6L5.8 21l1.4-7L2 9.3l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7-6.2-3.6L5.8 21l1.4-7L2 9.3l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7-6.2-3.6L5.8 21l1.4-7L2 9.3l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7-6.2-3.6L5.8 21l1.4-7L2 9.3l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7-6.2-3.6L5.8 21l1.4-7L2 9.3l7-.8z"/></svg>
+        </div>
+      </div>
+      <div class="testi reveal">
+        <span class="comilla">“</span>
+        <p>Lo que más me sorprendió fue que las tareas sí toman en cuenta cómo es mi comunidad. Nada de pedir cosas que las familias no pueden conseguir.</p>
+        <div class="quien">
+          <span class="avatar" style="background:var(--cempasuchil-2)">JR</span>
+          <div><strong>Mtro. Jorge R.</strong><span>2º grado · Estado de México</span></div>
+        </div>
+        <div class="estrellas" aria-label="5 estrellas">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7-6.2-3.6L5.8 21l1.4-7L2 9.3l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7-6.2-3.6L5.8 21l1.4-7L2 9.3l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7-6.2-3.6L5.8 21l1.4-7L2 9.3l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7-6.2-3.6L5.8 21l1.4-7L2 9.3l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7-6.2-3.6L5.8 21l1.4-7L2 9.3l7-.8z"/></svg>
+        </div>
+      </div>
+      <div class="testi reveal">
+        <span class="comilla">“</span>
+        <p>A mis alumnos les encanta el juego de la semana. Y a mí me encanta que si necesito un cambio, les escribo por WhatsApp y me lo resuelven el mismo día.</p>
+        <div class="quien">
+          <span class="avatar" style="background:var(--rosa)">AL</span>
+          <div><strong>Mtra. Alejandra L.</strong><span>6º grado · Querétaro</span></div>
+        </div>
+        <div class="estrellas" aria-label="5 estrellas">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7-6.2-3.6L5.8 21l1.4-7L2 9.3l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7-6.2-3.6L5.8 21l1.4-7L2 9.3l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7-6.2-3.6L5.8 21l1.4-7L2 9.3l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7-6.2-3.6L5.8 21l1.4-7L2 9.3l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7-6.2-3.6L5.8 21l1.4-7L2 9.3l7-.8z"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section class="section" id="faq">
+  <div class="wrap faq-grid">
+    <div class="faq-lado reveal">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2 style="margin-top:14px">Lo que las maestras y maestros nos preguntan</h2>
+      <p style="margin-top:14px;color:var(--tinta-suave)">¿Tienes otra duda? Escríbenos directo y te contestamos rápido.</p>
+      <div style="margin-top:22px">
+        <a href="#" class="btn btn-dark" data-wa data-msg="Hola EDUVO 👋 Tengo una duda antes de empezar:">Preguntar por WhatsApp</a>
+      </div>
+      <svg class="buho-faq" viewBox="0 0 120 120" aria-hidden="true"><use href="#buho"/></svg>
+    </div>
+    <div class="reveal">
+      <details class="faq">
+        <summary>¿Las planeaciones están alineadas a la Nueva Escuela Mexicana?
+          <span class="mas"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <div class="resp">Sí, completamente. Trabajamos con el programa vigente, los campos formativos, las metodologías activas y los procesos de desarrollo de aprendizaje oficiales. El formato es institucional y está pensado para entregarse a dirección tal como llega.</div>
+      </details>
+      <details class="faq">
+        <summary>¿Para qué grados funciona?
+          <span class="mas"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <div class="resp">Para todos los grados de primaria, de 1º a 6º. Cada planeación se prepara específicamente para tu grado y las características de tu grupo.</div>
+      </details>
+      <details class="faq">
+        <summary>¿Cómo recibo mi planeación cada semana?
+          <span class="mas"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <div class="resp">Directo en tu WhatsApp, puntual cada semana. Recibes tu planeación completa lista para imprimir, junto con los materiales, las tareas, el juego interactivo y los instrumentos de evaluación.</div>
+      </details>
+      <details class="faq">
+        <summary>¿Puedo pedir ajustes o cambios?
+          <span class="mas"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <div class="resp">Claro. Si algo no encaja con tu grupo, tu escuela o tu semana, nos escribes por el mismo chat y lo ajustamos rápido. La idea es que todo te sirva de verdad, no que te llegue y ya.</div>
+      </details>
+      <details class="faq">
+        <summary>¿Sirve para mi comunidad, aunque sea rural o con pocos recursos?
+          <span class="mas"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <div class="resp">Precisamente para eso está pensado. Antes de preparar tu primera semana te preguntamos por tu contexto, y las actividades y tareas se calibran a lo que tus alumnos y sus familias realmente tienen a la mano.</div>
+      </details>
+      <details class="faq">
+        <summary>¿Cuánto cuesta?
+          <span class="mas"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <div class="resp">Tenemos planes accesibles pensados para el bolsillo docente, según lo que necesites cada semana. Escríbenos por WhatsApp y te compartimos las opciones sin ningún compromiso.</div>
+      </details>
+      <details class="faq">
+        <summary>¿Tengo que instalar algo o aprender una plataforma?
+          <span class="mas"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <div class="resp">No. Todo funciona por WhatsApp, la app que ya usas todos los días. Sin registros complicados, sin contraseñas nuevas, sin curva de aprendizaje.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA FINAL ==================== -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta-final reveal">
+      <svg class="buho-cta" viewBox="0 0 120 120" aria-hidden="true"><use href="#buho"/></svg>
+      <h2>Esta semana, llega con todo <em>resuelto</em></h2>
+      <p>Cuéntanos tu grado y cómo es tu grupo. En un solo mensaje empiezas a recuperar tu tiempo.</p>
+      <a href="#" class="btn btn-wa" data-wa data-msg="Hola EDUVO 👋 Quiero mi planeación semanal. Soy docente de primaria y me gustaría conocer los planes.">
+        <svg class="wa-ico" viewBox="0 0 24 24" fill="#06301A"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.4-.7-2.9-1.1-4.7-4-4.9-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.2.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 .9c.3.2.5.3.6.4 0 .1 0 .5-.2 1z"/></svg>
+        Hablar con EDUVO ahora
+      </a>
+      <div class="nota">Respondemos rápido · Sin compromiso · Atención humana</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="#" class="logo" aria-label="EDUVO">
+          <svg class="logo-mark" viewBox="0 0 100 100"><use href="#marca"/></svg>
+          <span class="logo-word">EDU<em>VO</em></span>
+        </a>
+        <p>Planeaciones, materiales y evaluaciones para docentes de primaria en México, alineadas a la Nueva Escuela Mexicana. Tu tiempo, de vuelta.</p>
+      </div>
+      <div>
+        <h5>Explora</h5>
+        <ul>
+          <li><a href="#servicios">Qué recibes</a></li>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#materiales">Materiales</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="#" data-wa data-msg="Hola EDUVO 👋 Quiero información.">WhatsApp</a></li>
+          <li><a href="mailto:hola@eduvo.mx">hola@eduvo.mx</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© 2026 EDUVO · Hecho en México con criterio pedagógico 🇲🇽</span>
+      <span>Educación primaria · Nueva Escuela Mexicana</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== WHATSAPP FLOTANTE ==================== -->
+<div class="wa-tip" id="waTip">¿Dudas? Escríbenos 👋</div>
+<a href="#" class="wa-float" data-wa data-msg="Hola EDUVO 👋 Quiero información sobre las planeaciones semanales." aria-label="Abrir chat de WhatsApp con EDUVO">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.4-.7-2.9-1.1-4.7-4-4.9-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.2.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 .9c.3.2.5.3.6.4 0 .1 0 .5-.2 1z"/></svg>
+</a>
+
+<script>
+/* ============================================================
+   CONFIGURACIÓN — cambia aquí el número de WhatsApp de EDUVO
+   Formato: código de país + número, sin +, sin espacios.
+   Ejemplo México: "5217712345678"
+   ============================================================ */
+const WA_NUMBER = "5217700000000"; // ← REEMPLAZAR con el número real
+
+/* ---- Conector WhatsApp: todos los CTAs con data-wa ---- */
+document.querySelectorAll("[data-wa]").forEach(el=>{
+  el.addEventListener("click",e=>{
+    e.preventDefault();
+    const msg = encodeURIComponent(el.dataset.msg || "Hola EDUVO 👋 Quiero información.");
+    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`,"_blank","noopener");
+  });
+});
+
+/* ---- Navbar al hacer scroll ---- */
+const nav = document.getElementById("nav");
+const onScroll = ()=> nav.classList.toggle("scrolled", window.scrollY > 30);
+window.addEventListener("scroll", onScroll, {passive:true});
+onScroll();
+
+/* ---- Menú móvil ---- */
+const mm = document.getElementById("mobileMenu");
+document.getElementById("menuBtn").addEventListener("click",()=>mm.classList.add("open"));
+document.getElementById("closeBtn").addEventListener("click",()=>mm.classList.remove("open"));
+mm.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>mm.classList.remove("open")));
+
+/* ---- Reveal on scroll ---- */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} });
+},{threshold:.12, rootMargin:"0px 0px -40px 0px"});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+
+/* ---- Elemento firma: la planeación se escribe sola (en loop) ---- */
+const rows = [...document.querySelectorAll(".plan-row")];
+const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function playPlan(){
+  rows.forEach(r=>{
+    r.classList.remove("show");
+    r.querySelector(".check").classList.remove("on");
+  });
+  // forzar reflow para reiniciar animaciones
+  void document.getElementById("planRows").offsetWidth;
+  rows.forEach(r=>{
+    const d = +r.dataset.delay;
+    setTimeout(()=>{
+      r.classList.add("show");
+      setTimeout(()=>r.querySelector(".check").classList.add("on"), 500);
+    }, d);
+  });
+}
+if(reduced){
+  rows.forEach(r=>{ r.classList.add("show"); r.querySelector(".check").classList.add("on"); });
+}else{
+  playPlan();
+  setInterval(playPlan, 9000);
+}
+
+/* ---- Tilt 3D en la tarjeta de planeación (solo desktop) ---- */
+const stage = document.querySelector(".plan-stage");
+const card  = document.getElementById("planCard");
+if(!reduced && window.matchMedia("(pointer:fine)").matches){
+  stage.addEventListener("mousemove",e=>{
+    const r = stage.getBoundingClientRect();
+    const x = (e.clientX - r.left)/r.width - .5;
+    const y = (e.clientY - r.top)/r.height - .5;
+    card.style.transform = `rotateX(${4 - y*8}deg) rotateY(${-7 + x*10}deg)`;
+  });
+  stage.addEventListener("mouseleave",()=>{
+    card.style.transform = "rotateX(4deg) rotateY(-7deg)";
+  });
+}
+
+/* ---- Tabs de materiales ---- */
+const tabBtns = document.querySelectorAll(".tab-btn");
+tabBtns.forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    tabBtns.forEach(b=>{ b.classList.remove("active"); b.setAttribute("aria-selected","false"); });
+    document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));
+    btn.classList.add("active");
+    btn.setAttribute("aria-selected","true");
+    document.getElementById(btn.dataset.tab).classList.add("active");
+  });
+});
+
+/* ---- Tooltip del botón flotante (aparece tras 4s, se oculta al pasar el hero) ---- */
+const tip = document.getElementById("waTip");
+setTimeout(()=>tip.classList.add("show"), 4000);
+setTimeout(()=>tip.classList.remove("show"), 12000);
+</script>
+</body>
+</html>
